@@ -44,7 +44,7 @@
     <!--  0 == mobile, 1 == wifi. -->
     <integer name="def_network_preference">1</integer>
     <bool name="def_usb_mass_storage_enabled">true</bool>
-    <bool name="def_wifi_on">false</bool>
+    <bool name="def_wifi_on">true</bool>
     <bool name="def_networks_available_notification_on">true</bool>
 
     <bool name="def_backup_enabled">false</bool>
