@@ -157,7 +157,7 @@ public class Clock extends TextView {
 
     final void updateClock() {
         AM_PM_STYLE = (Settings.System.getInt(getContext().getContentResolver(),
-                Settings.System.STATUS_BAR_AM_PM, 1) == 1);
+                Settings.System.STATUS_BAR_AM_PM, 2));
                 mCalendar.setTimeInMillis(System.currentTimeMillis());
         setText(getSmallTime());
     }
