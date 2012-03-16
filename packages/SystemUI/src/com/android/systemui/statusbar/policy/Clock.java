@@ -61,7 +61,7 @@ public class Clock extends TextView {
     private static final int AM_PM_STYLE_SMALL   = 1;
     private static final int AM_PM_STYLE_GONE    = 2;
 
-    private static int AM_PM_STYLE = AM_PM_STYLE_GONE;
+    private static int AM_PM_STYLE = AM_PM_STYLE_SMALL;
 
     private int mAmPmStyle;
     private boolean mShowClock;
@@ -157,8 +157,8 @@ public class Clock extends TextView {
 
     final void updateClock() {
         AM_PM_STYLE = (Settings.System.getInt(getContext().getContentResolver(),
-                Settings.System.STATUS_BAR_AM_PM, 2));
-        mCalendar.setTimeInMillis(System.currentTimeMillis());
+                Settings.System.STATUS_BAR_AM_PM, 1) == 1);
+                mCalendar.setTimeInMillis(System.currentTimeMillis());
         setText(getSmallTime());
     }
 
