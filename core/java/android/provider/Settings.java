@@ -1756,6 +1756,15 @@ public final class Settings {
          */
         public static final String NOTIFICATION_LIGHT_PULSE = "notification_light_pulse";
 
+	/**
+         * User option to keep notification light even if screen was on
+         * @hide
+         */
+
+        public static final String NOTIFICATION_SCREEN_ON_PULSE = "notification_screen_on_pulse";
+
+
+
         /**
          * Show pointer location on screen?
          * 0 = no
@@ -2023,6 +2032,7 @@ public final class Settings {
             LOCKSCREEN_SOUNDS_ENABLED,
             SHOW_WEB_SUGGESTIONS,
             NOTIFICATION_LIGHT_PULSE,
+            NOTIFICATION_SCREEN_ON_PULSE,
             SIP_CALL_OPTIONS,
             SIP_RECEIVE_CALLS,
             POINTER_SPEED,

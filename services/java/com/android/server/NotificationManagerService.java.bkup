@@ -349,12 +349,7 @@ public class NotificationManagerService extends INotificationManager.Stub
             } else if (action.equals(Intent.ACTION_SCREEN_ON)) {
                 // Keep track of screen on/off state, but do not turn off the notification light
                 // until user passes through the lock screen or views the notification.
-		// use switch to keep notification on even if screen is on
-		if (mNotificationPulseScreenOnDisabled) {
-		mScreenOn = true;
-                } else {
-		mScreenOn = false;
-		}
+                mScreenOn = true;
             } else if (action.equals(Intent.ACTION_SCREEN_OFF)) {
                 mScreenOn = false;
             } else if (action.equals(TelephonyManager.ACTION_PHONE_STATE_CHANGED)) {
@@ -364,8 +359,8 @@ public class NotificationManagerService extends INotificationManager.Stub
             } else if (action.equals(Intent.ACTION_USER_PRESENT)) {
                 // turn off LED when user passes through lock screen
 		// added switch to make this optional
-		if (mScreenOn) {                
-		mNotificationLight.turnOff(); }
+		if mNotificationPulseScreenOnDisabled {                
+		mNotificationLight.turnOff();
             }
         }
     };
@@ -1147,8 +1142,9 @@ public class NotificationManagerService extends INotificationManager.Stub
             }
         }
 
-        // Don't flash while we are in a call or screen is on unless override set to have light with screen on
-        if (mLedNotification == null || mInCall || mScreenOn) {   
+        // Don't flash while we are in a call or screen is on
+        if (mLedNotification == null || mInCall) {
+// || mScreenOn
             mNotificationLight.turnOff();
         } else {
            int ledARGB = mLedNotification.notification.ledARGB;
