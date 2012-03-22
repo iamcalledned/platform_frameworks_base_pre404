@@ -16349,6 +16349,7 @@ package android.provider {
   }
 
   protected static abstract interface ContactsContract.BaseSyncColumns {
+    field public static final java.lang.String IS_RESTRICTED = "is_restricted";
     field public static final java.lang.String SYNC1 = "sync1";
     field public static final java.lang.String SYNC2 = "sync2";
     field public static final java.lang.String SYNC3 = "sync3";
@@ -17390,6 +17391,7 @@ package android.provider {
     field public static final java.lang.String ACTION_MANAGE_ALL_APPLICATIONS_SETTINGS = "android.settings.MANAGE_ALL_APPLICATIONS_SETTINGS";
     field public static final java.lang.String ACTION_MANAGE_APPLICATIONS_SETTINGS = "android.settings.MANAGE_APPLICATIONS_SETTINGS";
     field public static final java.lang.String ACTION_MEMORY_CARD_SETTINGS = "android.settings.MEMORY_CARD_SETTINGS";
+    field public static final java.lang.String ACTION_NED_SETTINGS = "android.settings.NED_SETTINGS";
     field public static final java.lang.String ACTION_NETWORK_OPERATOR_SETTINGS = "android.settings.NETWORK_OPERATOR_SETTINGS";
     field public static final java.lang.String ACTION_NFCSHARING_SETTINGS = "android.settings.NFCSHARING_SETTINGS";
     field public static final java.lang.String ACTION_PRIVACY_SETTINGS = "android.settings.PRIVACY_SETTINGS";
@@ -17572,6 +17574,7 @@ package android.provider {
     field public static final java.lang.String SHOW_PROCESSES = "show_processes";
     field public static final deprecated java.lang.String SHOW_WEB_SUGGESTIONS = "show_web_suggestions";
     field public static final java.lang.String SOUND_EFFECTS_ENABLED = "sound_effects_enabled";
+    field public static final java.lang.String STATUS_BAR_CLOCK = "status_bar_clock";
     field public static final java.lang.String STAY_ON_WHILE_PLUGGED_IN = "stay_on_while_plugged_in";
     field public static final java.lang.String SYS_PROP_SETTING_VERSION = "sys.settings_system_version";
     field public static final java.lang.String TEXT_AUTO_CAPS = "auto_caps";
