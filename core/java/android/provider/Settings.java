@@ -1910,7 +1910,15 @@ public final class Settings {
           * 
           * @hide
           */
+         
          public static final int NOTIFICATION_PULSE_COLOR_FALLBACK = -1;  // fallback to white if no other color set
+
+         /**
+          * Setting to allow % on lockscreen always showing.
+          * @hide
+          */
+         public static final String LOCKSCREEN_BATTERY = "lockscreen_battery";
+
 
          /*
           * 0: hide

@@ -78,6 +78,7 @@ class KeyguardStatusViewManager implements OnClickListener {
 
     // are we showing battery information?
     private boolean mShowingBatteryInfo = false;
+    private boolean mLockAlwaysBattery;
 
     // last known plugged in state
     private boolean mPluggedIn = false;
@@ -361,7 +362,9 @@ class KeyguardStatusViewManager implements OnClickListener {
         // If we have replaced the status area with a single widget, then this code
         // prioritizes what to show in that space when all transient messages are gone.
         CharSequence string = null;
-        if (mShowingBatteryInfo) {
+        mLockAlwaysBattery = Settings.System.getInt(getContext().getContentResolver(),
+                Settings.System.LOCKSCREEN_BATTERY, 0) == 1;
+        if (mShowingBatteryInfo || mLockAlwaysBattery) {
             // Battery status
             if (mPluggedIn) {
                 // Charging or charged
@@ -370,31 +373,34 @@ class KeyguardStatusViewManager implements OnClickListener {
                 } else {
                     string = getContext().getString(R.string.lockscreen_plugged_in, mBatteryLevel);
                 }
-                icon.value = CHARGING_ICON;
-            
-                } else if (mBatteryLevel < KeyguardUpdateMonitor.LOW_BATTERY_THRESHOLD) {
-                  // Battery is low
-                  string = getContext().getString(R.string.lockscreen_low_battery);
-                  icon.value = BATTERY_LOW_ICON;
+               icon.value = CHARGING_ICON;                
+             } else {
+                 if (mBatteryLevel < KeyguardUpdateMonitor.LOW_BATTERY_THRESHOLD) {
+                     // Battery is low
+                     string = getContext().getString(R.string.lockscreen_low_battery);
+                     icon.value = BATTERY_LOW_ICON;
+                 } else {
+                     // Always show battery
+                     string = getContext().getString(R.string.lockscreen_discharging,
+                              mBatteryLevel);
+                }
 
             }
         } else {
-            string = getContext().getString(R.string.lockscreen_discharging, mBatteryLevel);
+            string = mCarrierText;
         }
         return string;
     }
 
     private CharSequence getPriorityTextMessage(MutableInt icon) {
         CharSequence string = null;
+	mLockAlwaysBattery = Settings.System.getInt(getContext().getContentResolver(),
+                 Settings.System.LOCKSCREEN_BATTERY, 0) == 1;
         if (!TextUtils.isEmpty(mInstructionText)) {
             // Instructions only
             string = mInstructionText;
             icon.value = LOCK_ICON;
-        }  else if (!mShowingBatteryInfo) {
-            // battery stats when not plugged in
-            string = getContext().getString(R.string.lockscreen_discharging, mBatteryLevel);
-        
-        }  else if (mShowingBatteryInfo) {
+        } else if (mShowingBatteryInfo || mLockAlwaysBattery) {
             // Battery status
             if (mPluggedIn) {
                 // Charging or charged
@@ -404,11 +410,16 @@ class KeyguardStatusViewManager implements OnClickListener {
                     string = getContext().getString(R.string.lockscreen_plugged_in, mBatteryLevel);
                 }
                 icon.value = CHARGING_ICON;
-              } else if (mBatteryLevel < KeyguardUpdateMonitor.LOW_BATTERY_THRESHOLD) {
-                  // Battery is low
-                  string = getContext().getString(R.string.lockscreen_low_battery);
-                  icon.value = BATTERY_LOW_ICON;
-
+              } else {
+                 if (mBatteryLevel < KeyguardUpdateMonitor.LOW_BATTERY_THRESHOLD) {
+                     // Battery is low
+                     string = getContext().getString(R.string.lockscreen_low_battery);
+                     icon.value = BATTERY_LOW_ICON;
+                 } else {
+                     // Always show battery
+                     string = getContext().getString(R.string.lockscreen_discharging,
+                             mBatteryLevel);
+                 }
       
             }
         } else if (!inWidgetMode() && mOwnerInfoView == null && mOwnerInfoText != null) {
